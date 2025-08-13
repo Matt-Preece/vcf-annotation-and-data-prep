@@ -36,7 +36,7 @@ for(samp in samples) {
 									ignore.strand = T,
 									quiet = F)
 	fixed_annot <- as.data.frame(fixed_annot)
-	fixed_annot <- fixed_annot[,c("seqnames","start","end","ref","alt","annot.symbol","annot.type")]
+	fixed_annot <- fixed_annot[,c("seqnames","start","end","ref","alt","annot.symbol","annot.gene_id","annot.type")]
 	fixed_annot <- unique(fixed_annot)
 	fixed_annot <- fixed_annot[!is.na(fixed_annot$annot.symbol),]
 									
@@ -57,7 +57,7 @@ for(samp in samples) {
 									ignore.strand = T,
 									quiet = F)
 	fixed_annot <- as.data.frame(fixed_annot)
-	fixed_annot <- fixed_annot[,c("seqnames","start","end","ref","alt","annot.symbol","annot.type")]
+	fixed_annot <- fixed_annot[,c("seqnames","start","end","ref","alt","annot.symbol","annot.gene_id","annot.type")]
 	fixed_annot <- unique(fixed_annot)
 	fixed_annot <- fixed_annot[!is.na(fixed_annot$annot.symbol),]
 									
