@@ -1,6 +1,18 @@
-library(UpSetR, dplyr)
+setwd("/data/home/qp241207/vcf_all/")
 
-setwd("/data/home/qp241207/vcf_all/annotated/")
+libraries <- c("dplyr","vcfR","UpSetR")
+
+for (lib in libraries) {
+  if (require(package = lib, character.only = TRUE)) {
+    successful <- "Successful"
+  } else {
+    installing <- "Installing"
+    if (!requireNamespace("BiocManager", quietly = TRUE))
+      install.packages("BiocManager")
+    BiocManager::install(pkgs = lib, suppressUpdates = T)
+    library(lib, character.only = TRUE )
+  }
+}
 
 samples <- read.delim("names.txt", header = F)
 samples <- sort(samples[,1])
@@ -13,24 +25,43 @@ for(group in groups[1:3]) {
 keep <- grep(group, samples)
 samp <- samples[keep]
 
-one <- read.csv(paste0("./snv/", samp[1], "snv_annotated.csv"), header = T)
-one$snv_id <- paste(one$seqnames, one$start, one$ref, one$alt, sep = ".")
+one <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+one <- getFIX(one)
+one <- as.data.frame(one)
+one <- one[,c("CHROM","POS","REF","ALT")]
+one$snv_id <- paste(one$CHROM, one$POS, one$REF, one$ALT, sep = ".")
 one <- one$snv_id
 one <- unique(one)
-two <- read.csv(paste0("./snv/", samp[2], "snv_annotated.csv"), header = T)
-two$snv_id <- paste(two$seqnames, two$start, two$ref, two$alt, sep = ".")
+
+two <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+two <- getFIX(two)
+two <- as.data.frame(two)
+two <- two[,c("CHROM","POS","REF","ALT")]
+two$snv_id <- paste(two$CHROM, two$POS, two$REF, two$ALT, sep = ".")
 two <- two$snv_id
 two <- unique(two)
-three <- read.csv(paste0("./snv/", samp[3], "snv_annotated.csv"), header = T)
-three$snv_id <- paste(three$seqnames, three$start, three$ref, three$alt, sep = ".")
+	
+three <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+three <- getFIX(three)
+three <- as.data.frame(three)
+three <- three[,c("CHROM","POS","REF","ALT")]
+three$snv_id <- paste(three$CHROM, three$POS, three$REF, three$ALT, sep = ".")
 three <- three$snv_id
 three <- unique(three)
-four <- read.csv(paste0("./snv/", samp[4], "snv_annotated.csv"), header = T)
-four$snv_id <- paste(four$seqnames, four$start, four$ref, four$alt, sep = ".")
+
+four <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+four <- getFIX(four)
+four <- as.data.frame(four)
+four <- four[,c("CHROM","POS","REF","ALT")]
+four$snv_id <- paste(four$CHROM, four$POS, four$REF, four$ALT, sep = ".")
 four <- four$snv_id
 four <- unique(four)
-five <- read.csv(paste0("./snv/", samp[5], "snv_annotated.csv"), header = T)
-five$snv_id <- paste(five$seqnames, five$start, five$ref, five$alt, sep = ".")
+	
+five <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+five <- getFIX(five)
+five <- as.data.frame(five)
+five <- five[,c("CHROM","POS","REF","ALT")]
+five$snv_id <- paste(five$CHROM, five$POS, five$REF, five$ALT, sep = ".")
 five <- five$snv_id
 five <- unique(five)
 
@@ -46,25 +77,44 @@ png(file = paste0("./upset/snv/", group, "_snv_loc_upset.png"), width = 1500, he
 print(p1)
 dev.off()
 
-one <- read.csv(paste0("./indel/", samp[1], "indel_annotated.csv"), header = T)
-one$indel_id <- paste(one$seqnames, one$start, one$ref, one$alt, sep = ".")
-one <- one$indel_id
+one <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+one <- getFIX(one)
+one <- as.data.frame(one)
+one <- one[,c("CHROM","POS","REF","ALT")]
+one$snv_id <- paste(one$CHROM, one$POS, one$REF, one$ALT, sep = ".")
+one <- one$snv_id
 one <- unique(one)
-two <- read.csv(paste0("./indel/", samp[2], "indel_annotated.csv"), header = T)
-two$indel_id <- paste(two$seqnames, two$start, two$ref, two$alt, sep = ".")
-two <- two$indel_id
+
+two <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+two <- getFIX(two)
+two <- as.data.frame(two)
+two <- two[,c("CHROM","POS","REF","ALT")]
+two$snv_id <- paste(two$CHROM, two$POS, two$REF, two$ALT, sep = ".")
+two <- two$snv_id
 two <- unique(two)
-three <- read.csv(paste0("./indel/", samp[3], "indel_annotated.csv"), header = T)
-three$indel_id <- paste(three$seqnames, three$start, three$ref, three$alt, sep = ".")
-three <- three$indel_id
+	
+three <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+three <- getFIX(three)
+three <- as.data.frame(three)
+three <- three[,c("CHROM","POS","REF","ALT")]
+three$snv_id <- paste(three$CHROM, three$POS, three$REF, three$ALT, sep = ".")
+three <- three$snv_id
 three <- unique(three)
-four <- read.csv(paste0("./indel/", samp[4], "indel_annotated.csv"), header = T)
-four$indel_id <- paste(four$seqnames, four$start, four$ref, four$alt, sep = ".")
-four <- four$indel_id
+
+four <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+four <- getFIX(four)
+four <- as.data.frame(four)
+four <- four[,c("CHROM","POS","REF","ALT")]
+four$snv_id <- paste(four$CHROM, four$POS, four$REF, four$ALT, sep = ".")
+four <- four$snv_id
 four <- unique(four)
-five <- read.csv(paste0("./indel/", samp[5], "indel_annotated.csv"), header = T)
-five$indel_id <- paste(five$seqnames, five$start, five$ref, five$alt, sep = ".")
-five <- five$indel_id
+	
+five <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+five <- getFIX(five)
+five <- as.data.frame(five)
+five <- five[,c("CHROM","POS","REF","ALT")]
+five$snv_id <- paste(five$CHROM, five$POS, five$REF, five$ALT, sep = ".")
+five <- five$snv_id
 five <- unique(five)
 
 tmp <- gsub("_|r","", samp)
@@ -86,16 +136,27 @@ group <- "D"
 keep <- grep(group, samples)
 samp <- samples[keep]
 
-one <- read.csv(paste0("./snv/", samp[1], "snv_annotated.csv"), header = T)
-one$snv_id <- paste(one$seqnames, one$start, one$ref, one$alt, sep = ".")
+one <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+one <- getFIX(one)
+one <- as.data.frame(one)
+one <- one[,c("CHROM","POS","REF","ALT")]
+one$snv_id <- paste(one$CHROM, one$POS, one$REF, one$ALT, sep = ".")
 one <- one$snv_id
 one <- unique(one)
-two <- read.csv(paste0("./snv/", samp[2], "snv_annotated.csv"), header = T)
-two$snv_id <- paste(two$seqnames, two$start, two$ref, two$alt, sep = ".")
+
+two <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+two <- getFIX(two)
+two <- as.data.frame(two)
+two <- two[,c("CHROM","POS","REF","ALT")]
+two$snv_id <- paste(two$CHROM, two$POS, two$REF, two$ALT, sep = ".")
 two <- two$snv_id
 two <- unique(two)
-three <- read.csv(paste0("./snv/", samp[3], "snv_annotated.csv"), header = T)
-three$snv_id <- paste(three$seqnames, three$start, three$ref, three$alt, sep = ".")
+	
+three <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+three <- getFIX(three)
+three <- as.data.frame(three)
+three <- three[,c("CHROM","POS","REF","ALT")]
+three$snv_id <- paste(three$CHROM, three$POS, three$REF, three$ALT, sep = ".")
 three <- three$snv_id
 three <- unique(three)
 
@@ -112,17 +173,28 @@ png(file = paste0("./upset/snv/", group, "_snv_loc_upset.png"), width = 1500, he
 print(p1)
 dev.off()
 
-one <- read.csv(paste0("./indel/", samp[1], "indel_annotated.csv"), header = T)
-one$indel_id <- paste(one$seqnames, one$start, one$ref, one$alt, sep = ".")
-one <- one$indel_id
+one <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+one <- getFIX(one)
+one <- as.data.frame(one)
+one <- one[,c("CHROM","POS","REF","ALT")]
+one$snv_id <- paste(one$CHROM, one$POS, one$REF, one$ALT, sep = ".")
+one <- one$snv_id
 one <- unique(one)
-two <- read.csv(paste0("./indel/", samp[2], "indel_annotated.csv"), header = T)
-two$indel_id <- paste(two$seqnames, two$start, two$ref, two$alt, sep = ".")
-two <- two$indel_id
+
+two <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+two <- getFIX(two)
+two <- as.data.frame(two)
+two <- two[,c("CHROM","POS","REF","ALT")]
+two$snv_id <- paste(two$CHROM, two$POS, two$REF, two$ALT, sep = ".")
+two <- two$snv_id
 two <- unique(two)
-three <- read.csv(paste0("./indel/", samp[3], "indel_annotated.csv"), header = T)
-three$indel_id <- paste(three$seqnames, three$start, three$ref, three$alt, sep = ".")
-three <- three$indel_id
+	
+three <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+three <- getFIX(three)
+three <- as.data.frame(three)
+three <- three[,c("CHROM","POS","REF","ALT")]
+three$snv_id <- paste(three$CHROM, three$POS, three$REF, three$ALT, sep = ".")
+three <- three$snv_id
 three <- unique(three)
 
 
