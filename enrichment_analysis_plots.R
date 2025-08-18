@@ -51,7 +51,7 @@ gene_GO_df <- as.data.frame(gene_GO)
 
 	if(nrow(gene_GO_df) > 0) {
 		gene_GO_df <- gene_GO_df[,c("ONTOLOGY","Description","GeneRatio","BgRatio","qvalue","geneID")]
-		write.csv(gene_PA_df, file = paste0("./enrichment/GO/snv/",title,"_snv_ontology_enrich.csv"))
+		write.csv(gene_GO_df, file = paste0("./enrichment/GO/snv/",title,"_snv_ontology_enrich.csv"))
 	
 		png(file = paste0("./enrichment/GO/snv/",title,"_snv_GO.png"), width = 1500, height = 1000)
 		p2 <- dotplot(gene_GO, showCategory=15) + ggtitle(paste("GO Enrichment Analysis for",title,"SNVs"))
@@ -95,7 +95,7 @@ gene_GO_df <- as.data.frame(gene_GO)
 
 		if(nrow(gene_GO_df) > 0) {
 		gene_GO_df <- gene_GO_df[,c("ONTOLOGY","Description","GeneRatio","BgRatio","qvalue","geneID")]
-		write.csv(gene_PA_df, file = paste0("./enrichment/GO/indel/",title,"_indel_ontology_enrich.csv"))
+		write.csv(gene_GO_df, file = paste0("./enrichment/GO/indel/",title,"_indel_ontology_enrich.csv"))
 		
 		png(file = paste0("./enrichment/GO/indel/",title,"_indel_GO.png"), width = 1500, height = 1000)
 		p2 <- dotplot(gene_GO, showCategory=15) + ggtitle(paste("GO Enrichment Analysis for",title,"Indels"))
