@@ -25,7 +25,7 @@ for(group in groups[1:3]) {
 keep <- grep(group, samples)
 samp <- samples[keep]
 
-one <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+one <- read.vcfR(paste("./raw/caveman/", samp[1], "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
 one <- getFIX(one)
 one <- as.data.frame(one)
 one <- one[,c("CHROM","POS","REF","ALT")]
@@ -33,7 +33,7 @@ one$snv_id <- paste(one$CHROM, one$POS, one$REF, one$ALT, sep = ".")
 one <- one$snv_id
 one <- unique(one)
 
-two <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+two <- read.vcfR(paste("./raw/caveman/", samp[2], "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
 two <- getFIX(two)
 two <- as.data.frame(two)
 two <- two[,c("CHROM","POS","REF","ALT")]
@@ -41,7 +41,7 @@ two$snv_id <- paste(two$CHROM, two$POS, two$REF, two$ALT, sep = ".")
 two <- two$snv_id
 two <- unique(two)
 	
-three <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+three <- read.vcfR(paste("./raw/caveman/", samp[3], "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
 three <- getFIX(three)
 three <- as.data.frame(three)
 three <- three[,c("CHROM","POS","REF","ALT")]
@@ -49,7 +49,7 @@ three$snv_id <- paste(three$CHROM, three$POS, three$REF, three$ALT, sep = ".")
 three <- three$snv_id
 three <- unique(three)
 
-four <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+four <- read.vcfR(paste("./raw/caveman/", samp[4], "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
 four <- getFIX(four)
 four <- as.data.frame(four)
 four <- four[,c("CHROM","POS","REF","ALT")]
@@ -57,7 +57,7 @@ four$snv_id <- paste(four$CHROM, four$POS, four$REF, four$ALT, sep = ".")
 four <- four$snv_id
 four <- unique(four)
 	
-five <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+five <- read.vcfR(paste("./raw/caveman/", samp[5], "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
 five <- getFIX(five)
 five <- as.data.frame(five)
 five <- five[,c("CHROM","POS","REF","ALT")]
@@ -73,11 +73,11 @@ p1 <- upset(fromList(list_snvs),sets = tmp, keep.order = T, order.by = "freq",
 			mainbar.y.label = "SNV Overlaps", sets.x.label = "Total SNVs per Sample",
 			point.size = 7, line.size = 3, text.scale = c(5, 5, 3, 3, 7, 2.5))
 
-png(file = paste0("./upset/snv/", group, "_snv_loc_upset.png"), width = 1500, height = 1000)
+png(file = paste0("./annotated/upset/snv/", group, "_snv_loc_upset.png"), width = 1500, height = 1000)
 print(p1)
 dev.off()
 
-one <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+one <- read.vcfR(paste("./raw/pindel/", samp[1], "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
 one <- getFIX(one)
 one <- as.data.frame(one)
 one <- one[,c("CHROM","POS","REF","ALT")]
@@ -85,7 +85,7 @@ one$snv_id <- paste(one$CHROM, one$POS, one$REF, one$ALT, sep = ".")
 one <- one$snv_id
 one <- unique(one)
 
-two <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+two <- read.vcfR(paste("./raw/pindel/", samp[2], "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
 two <- getFIX(two)
 two <- as.data.frame(two)
 two <- two[,c("CHROM","POS","REF","ALT")]
@@ -93,7 +93,7 @@ two$snv_id <- paste(two$CHROM, two$POS, two$REF, two$ALT, sep = ".")
 two <- two$snv_id
 two <- unique(two)
 	
-three <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+three <- read.vcfR(paste("./raw/pindel/", samp[3], "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
 three <- getFIX(three)
 three <- as.data.frame(three)
 three <- three[,c("CHROM","POS","REF","ALT")]
@@ -101,7 +101,7 @@ three$snv_id <- paste(three$CHROM, three$POS, three$REF, three$ALT, sep = ".")
 three <- three$snv_id
 three <- unique(three)
 
-four <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+four <- read.vcfR(paste("./raw/pindel/", samp[4], "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
 four <- getFIX(four)
 four <- as.data.frame(four)
 four <- four[,c("CHROM","POS","REF","ALT")]
@@ -109,7 +109,7 @@ four$snv_id <- paste(four$CHROM, four$POS, four$REF, four$ALT, sep = ".")
 four <- four$snv_id
 four <- unique(four)
 	
-five <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+five <- read.vcfR(paste("./raw/pindel/", samp[5], "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
 five <- getFIX(five)
 five <- as.data.frame(five)
 five <- five[,c("CHROM","POS","REF","ALT")]
@@ -125,7 +125,7 @@ p1 <- upset(fromList(list_indels),sets = tmp, keep.order = T, order.by = "freq",
 			mainbar.y.label = "Indel Overlaps", sets.x.label = "Total Indels per Sample",
 			point.size = 7, line.size = 3, text.scale = c(5, 5, 3, 3, 7, 2.5))
 
-png(file = paste0("./upset/indel/", group, "_indel_loc_upset.png"), width = 1500, height = 1000)
+png(file = paste0("./annotated/upset/indel/", group, "_indel_loc_upset.png"), width = 1500, height = 1000)
 print(p1)
 dev.off()
 
@@ -136,7 +136,7 @@ group <- "D"
 keep <- grep(group, samples)
 samp <- samples[keep]
 
-one <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+one <- read.vcfR(paste("./raw/caveman/", samp[1], "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
 one <- getFIX(one)
 one <- as.data.frame(one)
 one <- one[,c("CHROM","POS","REF","ALT")]
@@ -144,7 +144,7 @@ one$snv_id <- paste(one$CHROM, one$POS, one$REF, one$ALT, sep = ".")
 one <- one$snv_id
 one <- unique(one)
 
-two <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+two <- read.vcfR(paste("./raw/caveman/", samp[2], "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
 two <- getFIX(two)
 two <- as.data.frame(two)
 two <- two[,c("CHROM","POS","REF","ALT")]
@@ -152,7 +152,7 @@ two$snv_id <- paste(two$CHROM, two$POS, two$REF, two$ALT, sep = ".")
 two <- two$snv_id
 two <- unique(two)
 	
-three <- read.vcfR(paste("./raw/caveman/", samp, "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
+three <- read.vcfR(paste("./raw/caveman/", samp[3], "vs_E1_SNV_ASMD140_CLPM0.vcf.bgz", sep = ""))
 three <- getFIX(three)
 three <- as.data.frame(three)
 three <- three[,c("CHROM","POS","REF","ALT")]
@@ -169,11 +169,11 @@ p1 <- upset(fromList(list_snvs),sets = tmp, keep.order = T, order.by = "freq",
 			mainbar.y.label = "SNV Overlaps", sets.x.label = "Total SNVs per Sample",
 			point.size = 7, line.size = 3, text.scale = c(5, 5, 3, 3, 7, 2.5))
 
-png(file = paste0("./upset/snv/", group, "_snv_loc_upset.png"), width = 1500, height = 1000)
+png(file = paste0("./annotated/upset/snv/", group, "_snv_loc_upset.png"), width = 1500, height = 1000)
 print(p1)
 dev.off()
 
-one <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+one <- read.vcfR(paste("./raw/pindel/", samp[1], "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
 one <- getFIX(one)
 one <- as.data.frame(one)
 one <- one[,c("CHROM","POS","REF","ALT")]
@@ -181,7 +181,7 @@ one$snv_id <- paste(one$CHROM, one$POS, one$REF, one$ALT, sep = ".")
 one <- one$snv_id
 one <- unique(one)
 
-two <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+two <- read.vcfR(paste("./raw/pindel/", samp[2], "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
 two <- getFIX(two)
 two <- as.data.frame(two)
 two <- two[,c("CHROM","POS","REF","ALT")]
@@ -189,7 +189,7 @@ two$snv_id <- paste(two$CHROM, two$POS, two$REF, two$ALT, sep = ".")
 two <- two$snv_id
 two <- unique(two)
 	
-three <- read.vcfR(paste("./raw/pindel/", samp, "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
+three <- read.vcfR(paste("./raw/pindel/", samp[3], "vs_E1_Indels_QUAL250_REP9.vcf.bgz", sep = ""))
 three <- getFIX(three)
 three <- as.data.frame(three)
 three <- three[,c("CHROM","POS","REF","ALT")]
@@ -206,6 +206,6 @@ p1 <- upset(fromList(list_indels),sets = tmp, keep.order = T, order.by = "freq",
 			mainbar.y.label = "Indel Overlaps", sets.x.label = "Total Indels per Sample",
 			point.size = 7, line.size = 3, text.scale = c(5, 5, 3, 3, 7, 2.5))
 
-png(file = paste0("./upset/indel/", group, "_indel_loc_upset.png"), width = 1500, height = 1000)
+png(file = paste0("./annotated/upset/indel/", group, "_indel_loc_upset.png"), width = 1500, height = 1000)
 print(p1)
 dev.off()
